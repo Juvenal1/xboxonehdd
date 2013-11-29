@@ -46,8 +46,6 @@ Required Files
 These can be gotten off your original HDD easily
 
 ```
-├── [4.0K]  System Support
-│   └── [8.1G]  cms.xvd
 └── [4.0K]  System Update
     ├── [4.0K]  A
     │   ├── [341M]  deltas.xvd
