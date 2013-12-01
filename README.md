@@ -4,13 +4,13 @@ Xbox One HDD Tools
 What this does
 --------------
 
-Given any HDD over 500GB in size, you can format it for use with you Microsoft Xbox One console
+Given any HDD over 500GB in size, you can format it for use with your Microsoft Xbox One console
 
 
 How
 ---
 
-http://i.imgur.com/56WNIjG.gif
+[Magic](http://i.imgur.com/56WNIjG.gif)
 
 
 Instructions
