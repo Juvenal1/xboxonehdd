@@ -4,13 +4,15 @@ import binascii
 
 UNUSED_GUID = '00000000000000000000000000000000'.decode('hex')
 
+
 def crc2bytes(crc):
-    res=''
+    res = ''
     for i in range(4):
-        t=crc & 0xFF
+        t = crc & 0xFF
         crc >>= 8
-        res='%s%c' % (res, t)
+        res = '%s%c' % (res, t)
     return res
+
 
 class Disk(object):
     @classmethod
@@ -160,7 +162,8 @@ class GPTPartitionTable(object):
     def active_partitions(self):
         active = []
         for part in self.partitions:
-            if part.type_guid == UNUSED_GUID: break
+            if part.type_guid == UNUSED_GUID:
+                break
             active.append(part)
         return active
 
@@ -204,10 +207,3 @@ class GPTPartition(object):
     def size(self):
         lba_size = self.last_lba - self.first_lba + 1
         return lba_size * self.table.header.disk.lba_size
-
-
-
-
-
-
-

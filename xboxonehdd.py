@@ -6,6 +6,7 @@ from os import path
 import sys
 import gptutil
 
+
 DISK_GUID           = 'DB4B34A2DED666479EB54109A12228E5'.decode('hex')
 TEMP_CONTENT_GUID   = 'A57D72B3ACA33D4B9FD62EA54441011B'.decode('hex')
 USER_CONTENT_GUID   = 'E0B59B865633E64B85F729323A675CC7'.decode('hex')
@@ -21,13 +22,14 @@ PARTITION_SIZES = [
     7516192768
 ]
 
+
 def print_parted_commands(device):
     temp_end = 1 + (PARTITION_SIZES[0]/1024/1024)
     user_end = temp_end + (PARTITION_SIZES[1]/1024/1024)
     sys_end = user_end + (PARTITION_SIZES[2]/1024/1024)
     upt_end = sys_end + (PARTITION_SIZES[3]/1024/1024)
     upt2_end = upt_end + (PARTITION_SIZES[4]/1024/1024)
-    
+
     f = open('mkxboxfs.sh', 'w')
     f.write('#!/bin/bash\n')
     f.write('DEV={0}\n'.format(device))
@@ -51,9 +53,11 @@ def print_parted_commands(device):
     f.close()
     os.chmod('mkxboxfs.sh', 0o777)
 
+
 def fixup_header(hdr):
     hdr.disk_guid = DISK_GUID
     hdr.fix_crc()
+
 
 def fixup_part_table(pt):
     pt.partitions[0].part_guid = TEMP_CONTENT_GUID
@@ -82,7 +86,7 @@ if __name__ == '__main__':
     partitions = disk.header.partition_table.active_partitions
 
     # calculate user partition size to nearest GiB
-    total_size = int(open(path.join('/sys','class', 'block', sys.argv[1], 'size'), 'r').readline()) * 512
+    total_size = int(open(path.join('/sys', 'class', 'block', sys.argv[1], 'size'), 'r').readline()) * 512
     user_content_size = (total_size - sum(PARTITION_SIZES))/1024/1024/1024
     PARTITION_SIZES[1] = user_content_size*1024*1024*1024
 
@@ -113,7 +117,7 @@ if __name__ == '__main__':
     # confirm actions
     print 'The actions performed CANNOT be reversed!'
     print 'Are you SURE you want to convert {0} to an Xbox ONE Disk?'.format(_path)
-    s = raw_input('Enter \'yes\' to continue: ')
+    s = raw_input("Enter 'yes' to continue: ")
     if s != 'yes':
         sys.exit(-4)
 
@@ -127,4 +131,3 @@ if __name__ == '__main__':
     diskf = open(_path, 'rb+')
     disk.commit(f=diskf)
     print 'Changes Written!'
-

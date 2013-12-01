@@ -10,7 +10,7 @@ Given any HDD over 500GB in size, you can format it for use with your Microsoft 
 How
 ---
 
-[Magic](http://i.imgur.com/56WNIjG.gif)
+![Magic](http://i.imgur.com/56WNIjG.gif)
 
 
 Instructions
